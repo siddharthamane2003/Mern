@@ -31,6 +31,7 @@ console.log(c);
 
 
 /* Q: Write a function to Rotate array right (clockwise) by k element */ 
+// use the while loop
 function rotateClock(arr,k){
     for (let i=0;i<arr.length;i++){
         let b=arr.pop();
