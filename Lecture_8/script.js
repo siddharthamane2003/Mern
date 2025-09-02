@@ -3,8 +3,8 @@ console.log("Heloo");
 
 
 // Object
-// why we need -> 
-// what is object ->
+// why we need -> watch
+// what is object -> watch
 // the key always trat as string 
 // if the key is integer so obj[1] -> 1 is key of object
 
@@ -262,9 +262,21 @@ portfolio.showSkills();
 // Use for in.. loop every in obejct And Array
 
 
-//Another use of object creation
+//Another use of object creation new keyword
 const newObj=new Object();
 newObj.a="a";
 newObj.b="b";
 newObj.c="c";
 console.log({newObj});
+
+
+
+const object = {
+  property1: "Property one",
+  property2: "Property two",
+  1: "one"
+}
+
+console.log(object["property3"]);
+console.log(object.property3);
+console.log(object[1]);  // 1->"1" convert into the string
