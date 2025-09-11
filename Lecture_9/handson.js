@@ -1,13 +1,16 @@
 ///Split()
 let String="Hello World";
 
-// String=String.split(" ") // separte word n=by space  
-String=String.split(""); // splits by charaters by charter
+// String=String.split(" ") // separte word by words space  
+// String=String.split(""); // splits by charaters by charter
+
+String=String.split("World") // [ 'Hello ', '' ] -> world -> return->""
 console.log(String);
 
 
 
 //rest oprtaor-> it will collect all the element in signle array
+//rest use in the functions
 function restOprator(name, ...newArray){
     console.log({newArray}); // Array 
     for (let i of newArray){  // intarte the newArray 
