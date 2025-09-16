@@ -69,7 +69,6 @@ binaryExpnsio(2,10);
 
 
 //rescusive approch
-
 function exponant(p,q){
     if(p==0) return 1;
     if(q==1) return p;

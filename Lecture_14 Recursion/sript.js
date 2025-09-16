@@ -65,7 +65,7 @@ console.log({a, b}); */
 // listen
 // silent (✅)
 
-///* Create a map of silent, then traverse in listen and 
+// Create a map of silent, then traverse in listen and 
 // start decrementing the freq of each element if it exists in map */
 
 // function Anagrams(a,b){
