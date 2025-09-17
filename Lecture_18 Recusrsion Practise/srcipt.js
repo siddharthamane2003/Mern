@@ -28,9 +28,11 @@ function check(a){
 console.log(check("(((()))()())"));
 console.log(check("((())))"));
 
+
+//[ '(())', '()()' ]
 let ans=[]
 function generateValidParenthesis(n,str="",i=0,o=0,c=0){
-    
+
     if(o<c){
         return;
     }
@@ -51,12 +53,29 @@ console.log(ans);
 //Space complixity -> O(N)
 
 
-function abcPaternprint(s,i=0,j=0){
+//[ 'abc', 'acb', 'bac', 'bca', 'cba', 'cab' ]
+//Time Complexity ->~O(N!)
+
+function abcPattrenPrint(s,i=0,j=0){
     let arr=s.split("");
 
     [arr[i],arr[j]]=[arr[j],arr[i]];
-    str=arr.join("");
-
-    return str;
+    return arr.join("");
 }
-console.log(abcPaternprint("abc"));
+
+let strPermutation=[];
+function permutation(s,ind=0){
+        if(ind==s.length-1){
+            strPermutation.push(s);
+            return;
+        }
+        
+    for (let i=ind;i<s.length;i++){
+        let swappedstr=abcPattrenPrint(s,ind,i);
+
+        permutation(swappedstr,ind+1);
+    }
+}
+ 
+permutation("abc");
+console.log(strPermutation);

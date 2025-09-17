@@ -60,7 +60,6 @@ console.log(fibonacci(7))
 
 
 //binary expnasion
-
 function binaryExpnsio(a,b){
         let pow=a**b;
         console.log(pow);
