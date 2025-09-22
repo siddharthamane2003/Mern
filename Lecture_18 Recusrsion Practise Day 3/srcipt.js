@@ -70,10 +70,10 @@ function permutation(s,ind=0){
             return;
         }
         
-    for (let i=ind;i<s.length;i++){
+    for (let j=ind;j<s.length;i++){
         let swappedstr=abcPattrenPrint(s,ind,i);
 
-        permutation(swappedstr,ind+1);
+        permutation(swappedstr,i+1);
     }
 }
  
