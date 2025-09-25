@@ -57,37 +57,174 @@ console.log(handsonupdatedMergeSort(A,0,A.length-1));
 
 
 
-let a = [3, 1, 6, 2, 8, 7, 4];
-let re = [];
-re.push(a[0]); // first element is sorted
+//Insertion Sort -> the above code is not insertion sort becase you use the extra array
+// function insertionSort(arr){
+// let re = [arr[0]]; 
 
-for (let i = 1; i < a.length; i++) {
-    let key = a[i];         // element to insert
-    let inserted = false;   // flag to check if key is inserted
+// for (let i = 1; i < arr.length; i++) {
+//     let f = false;  
 
-    for (let j = 0; j < re.length; j++) {
-        if (key < re[j]) {
-            // shift elements to the right to make space
-            for (let k = re.length; k > j; k--) {
-                re[k] = re[k - 1];
+//     for (let j = 0; j < re.length; j++) {
+//         if (arr[i] < re[j]) {
+           
+//             re.splice(j, 0, arr[i]);  
+//             f = true;
+//             break;
+//         }
+//     }
+
+//         if (f == false) {
+//             re.push(arr[i]);
+//         }
+//     }
+//     return re;
+// }
+
+// let arr = [3,1,6,2,8,7,4];
+// console.log(insertionSort(arr));
+
+
+
+//Insertion Sort
+
+function insertionSort(b){
+    let n=b.length;
+    let ind=0;
+    let insertAtCorretPos=0;
+
+    for (let i=1;i<n;i++){
+        let firstElemOfUnsortedPart=b[i];
+
+        for (let j=ind;j>=0;j--){
+            if(b[j]>firstElemOfUnsortedPart){
+                b[j+1]=b[j];
             }
-            re[j] = key;   // insert key at correct position
-            inserted = true;
-            break;          // exit inner loop once inserted
+            else{
+                insertAtCorretPos=j+1;
+                break;
+            }
         }
+        b[insertAtCorretPos]=firstElemOfUnsortedPart;
+        ind++;
     }
+    
 
-    // if key is larger than all elements in re, push at end
-    if (!inserted) {
-        re.push(key);
-    }
+    return b;
+
 }
-
-console.log(re);
-
+console.log(insertionSort([3,1,6,2,8,7,4]));
 
 
+/*
+## 🔹 Dry Run Step by Step
 
+**Initial Array:** `[3, 1, 6, 2, 8, 7, 4]`
+Sorted part: `[3]` | Unsorted part: `[1, 6, 2, 8, 7, 4]`
+
+---
+
+### Step 1: i = 1 → pick `1`
+
+* `firstElemOfUnsortedPart = 1`
+* `j = ind = 0 → arr[j] = 3`
+
+  * `3 > 1` → **IF** → shift 3 right → `[3, 3, 6, 2, 8, 7, 4]`
+* No more `j` left, **ELSE** sets `indexToInsertAt = 0`
+* Insert 1 at index 0 → `[1, 3, 6, 2, 8, 7, 4]`
+* `ind++ → 1`
+
+---
+
+### Step 2: i = 2 → pick `6`
+
+* `firstElemOfUnsortedPart = 6`
+* `j = 1 → arr[j] = 3`
+
+  * `3 > 6` ❌ → **ELSE** → `indexToInsertAt = 2`, break
+* Insert 6 at index 2 → `[1, 3, 6, 2, 8, 7, 4]`
+* `ind++ → 2`
+
+---
+
+### Step 3: i = 3 → pick `2`
+
+* `firstElemOfUnsortedPart = 2`
+* `j = 2 → arr[j] = 6`
+
+  * `6 > 2` → **IF** → shift 6 right → `[1, 3, 6, 6, 8, 7, 4]`
+* `j = 1 → arr[j] = 3`
+
+  * `3 > 2` → **IF** → shift 3 right → `[1, 3, 3, 6, 8, 7, 4]`
+* `j = 0 → arr[j] = 1`
+
+  * `1 > 2` ❌ → **ELSE** → `indexToInsertAt = 1`, break
+* Insert 2 at index 1 → `[1, 2, 3, 6, 8, 7, 4]`
+* `ind++ → 3`
+
+---
+
+### Step 4: i = 4 → pick `8`
+
+* `firstElemOfUnsortedPart = 8`
+* `j = 3 → arr[j] = 6`
+
+  * `6 > 8` ❌ → **ELSE** → `indexToInsertAt = 4`, break
+* Insert 8 at index 4 → `[1, 2, 3, 6, 8, 7, 4]`
+* `ind++ → 4`
+
+---
+
+### Step 5: i = 5 → pick `7`
+
+* `firstElemOfUnsortedPart = 7`
+* `j = 4 → arr[j] = 8`
+
+  * `8 > 7` → **IF** → shift 8 → `[1, 2, 3, 6, 8, 8, 4]`
+* `j = 3 → arr[j] = 6`
+
+  * `6 > 7` ❌ → **ELSE** → `indexToInsertAt = 4`, break
+* Insert 7 at index 4 → `[1, 2, 3, 6, 7, 8, 4]`
+* `ind++ → 5`
+
+---
+
+### Step 6: i = 6 → pick `4`
+
+* `firstElemOfUnsortedPart = 4`
+* `j = 5 → arr[j] = 8`
+
+  * `8 > 4` → **IF** → shift 8 → `[1, 2, 3, 6, 7, 8, 8]`
+* `j = 4 → arr[j] = 7`
+
+  * `7 > 4` → **IF** → shift 7 → `[1, 2, 3, 6, 7, 7, 8]`
+* `j = 3 → arr[j] = 6`
+
+  * `6 > 4` → **IF** → shift 6 → `[1, 2, 3, 6, 6, 7, 8]`
+* `j = 2 → arr[j] = 3`
+
+  * `3 > 4` ❌ → **ELSE** → `indexToInsertAt = 3`, break
+* Insert 4 at index 3 → `[1, 2, 3, 4, 6, 7, 8]`
+* `ind++ → 6`
+
+---
+
+### ✅ Final Sorted Array
+
+```
+[1, 2, 3, 4, 6, 7, 8]
+```
+
+---
+
+### 🔹 Summary
+
+* **`IF`** → shift elements to the right if bigger than the element to insert.
+* **`ELSE`** → found the correct position → insert element here.
+* **`ind`** → marks how much of the array is already sorted.
+* Step by step, **each unsorted element finds its correct position** until the array is fully sorted.
+
+
+*/
 
 
 

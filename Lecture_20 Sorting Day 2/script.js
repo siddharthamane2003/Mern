@@ -1,4 +1,4 @@
-console.log("This is  Lecture 20th on Merge Sort  and  Insertion Sort");
+console.log("This is  Lecture 20th on Merge Sort  and  InsertionSortInsertionSort Sort");
 
 
 function mergeSort(A,B){
@@ -56,42 +56,59 @@ let Arr=[3,9,5,2,19,4,7]
 console.log(updtaedMegreSort(Arr,0,Arr.length-1));
 
 
+/******************  InSertion Sort **********************/
+//Demo Of InsertionSortInsertionSort Sort
+// let a=[1,2,7,9,6];
+// for (let i=0;i<a.length;i++){
+//     if(a[i]>a[a.length-1]){
+//         [a[i],a[a.length-1]]=[a[a.length-1],a[i]];
+//     }
+// }
+// console.log(a) 
 
-let a=[1,2,7,9,6];
-
-for (let i=0;i<a.length;i++){
-    if(a[i]>a[a.length-1]){
-        [a[i],a[a.length-1]]=[a[a.length-1],a[i]];
-    }
-}
-
-console.log(a) 
-
-
-
-//Insertion Sort
-function insertionSort(arr){
-let re = [arr[0]]; 
-
-for (let i = 1; i < arr.length; i++) {
-    let f = false;  
-
-    for (let j = 0; j < re.length; j++) {
-        if (arr[i] < re[j]) {
-           
-            re.splice(j, 0, arr[i]);  
-            f = true;
+function InsertionAtCorrect(arr3){
+    let lastelement=arr3[arr3.length-1];
+    let insertAt=0;
+    let n=arr3.length;
+    for (let j=n-2;j>=0;j--){
+        if(arr3[j]>lastelement){
+            arr3[j+1]=arr3[j];
+        }
+        else{
+            arr3[lastelement]=j+1;
             break;
         }
     }
 
-        if (f == false) {
-            re.push(arr[i]);
+    arr3[insertAt]=lastelement;
+    return arr3;
+}
+let arr3=[3,4,7,9,2]
+console.log(InsertionAtCorrect(arr3));
+
+
+
+
+//Ineration Sort -> 
+function InsertionSort(arr){
+    let ind=0;
+    for (let i=1;i<arr.length;i++){
+        let firstElemOfUnsortedPart=arr[i];
+        let indexToInsrtAt=0;
+        for (let j=ind;j>=0;j--){
+            if(arr[j]>firstElemOfUnsortedPart){
+                arr[j+1]=arr[j];
+            }
+            else{
+                indexToInsrtAt=j+1;
+                break;
+            }
         }
+        arr[indexToInsrtAt]=firstElemOfUnsortedPart;
+        ind++;
     }
-    return re;
+    return arr;
 }
 
-
-let arr = [3,1,6,2,8,7,4];
-console.log(insertionSort(arr));
+let arr=[3,1,6,2,8,7,4];
+console.log(InsertionSort(arr).join(" "));
