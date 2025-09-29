@@ -1,107 +1,141 @@
-//Arrow Function
-//For Each Loop
-//anonums fcuntion
-//fucntion explresssion
-//map ,filter
-//this keyword
+/* =========== Functions =========== */
 
-
-console.log("Advaced Functions: ")
-
-/**************************Advacsed Functions*****************************************/
-
-const arrow = (a) => {
-    if (a % 3 == 0) return true;
-    else return false;
-};
-console.log("Number is Divisble or not: ", arrow(10));
-
-
-const isDivisible3 = (num) => !(num % 3);
-console.log(isDivisible3(10));
-
-
-const student = {
-    name: "Siddharth",
-    rollNo: 28,
-    acsess: function result(status) {
-        console.log(this.name, this.rollNo, status + " Status");
-        console.log(this);
-    },
-    notacess: (resultStatus) => {
-        console.log(this.name + " name " + resultStatus);
-        console.log(this);
-    }
+//function declaration
+//this function is hoisted
+function sayHello() {
+  console.log("Hello Students");
 }
 
-student.acsess("passed");
-student.notacess("Failed");
+/* Types of functions */
+/* =========== Arrow Functions =========== */
+// arrow(3, 4); Note: gives error, as arrow functions are not hoisted, but the variable is
+/* Method 1 --> 
+const arrow = (a, b) => a - b; */
 
+/* Method 2 --> */
+const arrow = (a, b) => {
+  return a - b;
+};
 
+console.log(arrow(5, 2));
 
-//multiplying the 2 each element
+/* write an arrow function to check if a number is divisible by 3 or not */
+
+/* //doing it using more than 1 statement
+const isDivisibleBy3 = (num) => {
+  if (num % 3 == 0) return true;
+  else return false;
+}; */
+
+//doing it using single statement
+const isDivisibleBy3 = (num) => !(num % 3);
+console.log(isDivisibleBy3(19));
+console.log(isDivisibleBy3(9));
+console.log(isDivisibleBy3(18));
+
+/* Note: arrow functions do not have their own `this` keyword, they uses parent's `this` */
+const student = {
+  fullName: "Pratik Mane",
+  age: 2,
+  result1: function (resultStatus) {
+    console.log(this.fullName + " has " + resultStatus + " the exam");
+    console.log(this); //shows the object properties
+  },
+  result2: (resultStatus) => {
+    //this.fullName gives undefined, as parent's this doesn't have `fullName` property
+    console.log(this.fullName + " has " + resultStatus + " the exam");
+    console.log(this); //doesn't shows the properties of object, instead shows window object(parent's this)
+  },
+};
+
+student.result1("passed");
+student.result2("failed");
+
+/* =========== Anonymous Functions =========== */
+/* basically a function with no name */
+
+/* =========== Higher Order Functions (HOFs) =========== */
+/* These functions are either functions that takes functions as arguments or returns a function */
+
+/* Types of HOFs */
+/* 1. forEach() 
+  - applies the callback function on each element
+  - iterates over each element and doesn't break like other for loops
+  - doesn't change the original array
+  - returns undefined
+  - can be used to iterate and do some operations on array
+*/
 let arr = [2, 1, 6, 3, 9];
 
 console.log(
-    arr.forEach((value, index, array) => {
-        value *= 2;
-        array[index] = value;
-        console.log(value, index, array);
-    })
-)
-console.log(arr);
-
-
-
-//print the age and name
+  arr.forEach((value, index, array) => {
+    value *= 2;
+    array[index] = value;
+    console.log(value, index, array);
+  })
+);
+console.log({ arr });
 
 let users = [
-    { name: "Ramesh", age: 20 },
-    { name: "Suresh", age: 26 },
-    { name: "Rani", age: 40 }
+  { name: "Ramesh", age: 20 },
+  { name: "Suresh", age: 10 },
+  { name: "Rani", age: 40 },
 ];
-console.log(
-    users.forEach((val) => {
-        console.log(val.name + " " + val.age);
-    })
-);
+//print name and age of users array using forEach
+users.forEach((value) => {
+  console.log(value.name + " " + value.age);
+});
 
-
-
-
-
-//map()
-//transfrom into the new array
-//return the array
-//doest not chage the originar array
+/* 2. map() 
+  - transforms the array
+  - returns an array
+  - doesn't change the original array
+*/
 
 arr = [3, 2, 9, 0, 10];
-let squaredarr = arr.map((value, index, array) => {
-    return value * value;
-})
-console.log(squaredarr);
+let squaredArr = arr.map((value, index, array) => {
+  return value * value;
+});
 
+console.log({ squaredArr });
 
-//transfrom the name of each to unppercase
 users = [
-    { name: "Ramesh", age: 20 },
-    { name: "Suresh", age: 26 },
-    { name: "Rani", age: 40 }
+  { name: "Ramesh", age: 20 },
+  { name: "Suresh", age: 10 },
+  { name: "Rani", age: 40 },
+];
+/* transform the name of each user to uppercase 
+new array should be like this:
+
+[
+  { name: "RAMESH", age: 20 },
+  { name: "SURESH", age: 10 },
+  { name: "RANI", age: 40 },
 ];
 
-let unppercase = users.map((value) => {
-    return {
-        name: value.name.toUpperCase(),
-        age: value.age
-    };
-})
-console.log(unppercase);
+*/
+let capitalNamedUsers = users.map((value) => {
+  /* this will change the original data (i.e., users array)
+  value.name = value.name.toUpperCase();
+  return value; */
+  return { name: value.name.toUpperCase(), age: value.age };
+});
+console.log({ capitalNamedUsers });
+console.log({ users });
 
-//2. filter()
+/* 3. filter() 
+  - keeps the elements that passes the condition
+  - returns an array
+  - doesn't change the original array
+  - nums.filter((value, index, array) => condition)
+*/
 
-// let nums=[2,12,9,18,27];
-// let oddNums=nums,filter((val,index))
+let nums = [2, 12, 9, 18, 27];
+const oddNums = nums.filter((value, index, array) => value % 2);
 
-let names = ["prajwal", "Bhavesh", "Uday", "Siddharth", "Neha"];
-const chater5 = names.filter((val) => val.length > 5);
-console.log(chater5);
+console.log({ oddNums });
+
+let names = ["Pranjal", "Bhavesh", "Uday", "Siddharth", "Neha"];
+/* filter above `names` array in a way that names less than 5 characters are eleminated  
+o/p -> ["Pranjal", "Bhavesh", "Siddharth"];
+*/
